@@ -151,6 +151,34 @@
             color: #555;
             margin-bottom: 20px;
         }
+        .price-guide-link {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #8B4513;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+            margin-top: 10px;
+            text-align: center;
+        }
+        .price-guide-link:hover {
+            background-color: #A0522D;
+        }
+        .price-guide-link::after {
+            content: " +";
+            font-weight: bold;
+        }
+        .instructions {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+        }
+        .instructions p {
+            margin: 0;
+            color: #555;
+        }
     </style>
 </head>
 <body>
@@ -161,7 +189,10 @@
 
         <!-- إدخال البيانات -->
         <div class="section">
-            <h2>إدخال البيانات</h2>
+            <h2>حاسبة تكلفة البناء الآلية</h2>
+            <div class="instructions">
+                <p>أدخل البيانات المطلوبة واضغط على "احسب التكلفة" للحصول على النتائج.</p>
+            </div>
             <label for="projectName">اسم المشروع (اختياري):</label>
             <input type="text" id="projectName" placeholder="أدخل اسم المشروع">
 
@@ -256,10 +287,13 @@
             </table>
         </div>
 
-        <!-- حاسبة تكلفة البناء مع تعديل أسعار المواد يدويًا -->
+        <!-- حاسبة تكلفة البناء مع تعديل الأسعار يدويًا -->
         <div class="manual-price-calculator">
-            <h2>حاسبة تكلفة البناء مع تعديل أسعار المواد يدويًا</h2>
-            <p>يمكنك في هذا القسم من حساب تكلفة البناء عبر إضافة أسعار المواد الأساسية.</p>
+            <h2>حاسبة تكلفة البناء مع تعديل الأسعار يدويًا</h2>
+            <div class="instructions">
+                <p>أدخل الأسعار يدويًا في الجدول المخصص.</p>
+                <p>اضغط على "احسب التكلفة" للحصول على الإجمالي الكلي بناءً على الأسعار المدخلة.</p>
+            </div>
             <table id="manualPriceTable">
                 <thead>
                     <tr>
@@ -287,14 +321,14 @@
         <div class="section">
             <h2>دليل أسعار المواد والأعمال</h2>
             <p>لمعرفة آخر الأسعار المحدثة للمواد والأعمال، يرجى زيارة الرابط التالي:</p>
-            <a href="https://guyc-yemen.com/price-guide/" target="_blank">قوائم الأسعار في منصة الاتحاد العام للمقاولين اليمنيين</a>
+            <a href="https://guyc-yemen.com/price-guide/" target="_blank" class="price-guide-link">قوائم الأسعار في منصة الاتحاد العام للمقاولين اليمنيين</a>
         </div>
 
         <!-- مشاركة النتيجة -->
         <div class="share-buttons">
             <button onclick="shareOnWhatsApp()">مشاركة عبر الواتساب</button>
-            <button onclick="shareOnFacebook()">مشاركة عبر الفيسبوك</button>
-            <button onclick="shareOnTwitter()">مشاركة عبر تويتر</button>
+            <button onclick="printResult()">طباعة</button>
+            <button onclick="downloadExcel()">تنزيل النتيجة في ملف Excel</button>
         </div>
 
         <!-- تفاصيل التواصل -->
@@ -312,6 +346,7 @@
             steel: 80000,   // ريال/طن
             cement: 6000,   // ريال/طن
             bricks: 500,    // ريال/1000 طوبة
+            blocks: 300,    // ريال/1000 بلوك
             paint: 100,     // ريال/لتر
             tiles: 200,     // ريال/م²
             doors: 5000,    // ريال/باب
@@ -382,6 +417,7 @@
                 steel: (area * 0.05 * floors).toFixed(2),   // طن
                 cement: (area * 0.1 * floors).toFixed(2),   // طن
                 bricks: (area * 100 * floors).toFixed(2),   // طوبة
+                blocks: (area * 50 * floors).toFixed(2),    // بلوك
                 paint: (area * 0.5 * floors).toFixed(2),    // لتر
                 tiles: (area * floors).toFixed(2),          // م²
                 doors: (area / 10 * floors).toFixed(2),     // باب
@@ -484,6 +520,7 @@
                 <tr><td>الحديد</td><td>${quantities.steel}</td><td>طن</td></tr>
                 <tr><td>الأسمنت</td><td>${quantities.cement}</td><td>طن</td></tr>
                 <tr><td>الطوب</td><td>${quantities.bricks}</td><td>طوبة</td></tr>
+                <tr><td>البلوك</td><td>${quantities.blocks}</td><td>بلوك</td></tr>
                 <tr><td>الدهان</td><td>${quantities.paint}</td><td>لتر</td></tr>
                 <tr><td>البلاط</td><td>${quantities.tiles}</td><td>م²</td></tr>
                 <tr><td>الأبواب</td><td>${quantities.doors}</td><td>باب</td></tr>
@@ -534,6 +571,13 @@
                     <td id="manualBricksTotal">0</td>
                 </tr>
                 <tr>
+                    <td>البلوك</td>
+                    <td>${quantities.blocks}</td>
+                    <td>بلوك</td>
+                    <td><input type="number" id="manualBlocksPrice" placeholder="أدخل السعر"></td>
+                    <td id="manualBlocksTotal">0</td>
+                </tr>
+                <tr>
                     <td>الدهان</td>
                     <td>${quantities.paint}</td>
                     <td>لتر</td>
@@ -578,11 +622,12 @@
                 steel: parseFloat(document.querySelector("#manualPriceTable tbody tr:nth-child(2) td:nth-child(2)").innerText),
                 cement: parseFloat(document.querySelector("#manualPriceTable tbody tr:nth-child(3) td:nth-child(2)").innerText),
                 bricks: parseFloat(document.querySelector("#manualPriceTable tbody tr:nth-child(4) td:nth-child(2)").innerText),
-                paint: parseFloat(document.querySelector("#manualPriceTable tbody tr:nth-child(5) td:nth-child(2)").innerText),
-                tiles: parseFloat(document.querySelector("#manualPriceTable tbody tr:nth-child(6) td:nth-child(2)").innerText),
-                doors: parseFloat(document.querySelector("#manualPriceTable tbody tr:nth-child(7) td:nth-child(2)").innerText),
-                windows: parseFloat(document.querySelector("#manualPriceTable tbody tr:nth-child(8) td:nth-child(2)").innerText),
-                flooring: parseFloat(document.querySelector("#manualPriceTable tbody tr:nth-child(9) td:nth-child(2)").innerText)
+                blocks: parseFloat(document.querySelector("#manualPriceTable tbody tr:nth-child(5) td:nth-child(2)").innerText),
+                paint: parseFloat(document.querySelector("#manualPriceTable tbody tr:nth-child(6) td:nth-child(2)").innerText),
+                tiles: parseFloat(document.querySelector("#manualPriceTable tbody tr:nth-child(7) td:nth-child(2)").innerText),
+                doors: parseFloat(document.querySelector("#manualPriceTable tbody tr:nth-child(8) td:nth-child(2)").innerText),
+                windows: parseFloat(document.querySelector("#manualPriceTable tbody tr:nth-child(9) td:nth-child(2)").innerText),
+                flooring: parseFloat(document.querySelector("#manualPriceTable tbody tr:nth-child(10) td:nth-child(2)").innerText)
             };
 
             const prices = {
@@ -590,6 +635,7 @@
                 steel: parseFloat(document.getElementById('manualSteelPrice').value) || 0,
                 cement: parseFloat(document.getElementById('manualCementPrice').value) || 0,
                 bricks: parseFloat(document.getElementById('manualBricksPrice').value) || 0,
+                blocks: parseFloat(document.getElementById('manualBlocksPrice').value) || 0,
                 paint: parseFloat(document.getElementById('manualPaintPrice').value) || 0,
                 tiles: parseFloat(document.getElementById('manualTilesPrice').value) || 0,
                 doors: parseFloat(document.getElementById('manualDoorsPrice').value) || 0,
@@ -616,22 +662,34 @@
             window.open(url, '_blank');
         }
 
-        // مشاركة النتيجة عبر الفيسبوك
-        function shareOnFacebook() {
-            const url = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`;
-            window.open(url, '_blank');
+        // طباعة النتيجة
+        function printResult() {
+            window.print();
         }
 
-        // مشاركة النتيجة عبر تويتر
-        function shareOnTwitter() {
+        // تنزيل النتيجة كملف Excel
+        function downloadExcel() {
             const totalCost = document.getElementById('totalCost').innerText;
-            const message = `حاسبة البناء - التكلفة الإجمالية: ${totalCost}\n\n${window.location.href}`;
-            const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(message)}`;
-            window.open(url, '_blank');
+            const details = document.getElementById('costDetails').innerText;
+            const quantities = document.getElementById('quantityTable').innerText;
+            const phaseCosts = document.getElementById('phaseCostTable').innerText;
+
+            const data = [
+                ["التكلفة الإجمالية", totalCost],
+                ["تفاصيل التكلفة", details],
+                ["الكميات المطلوبة", quantities],
+                ["تكلفة كل مرحلة", phaseCosts]
+            ];
+
+            const ws = XLSX.utils.aoa_to_sheet(data);
+            const wb = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(wb, ws, "النتيجة");
+            XLSX.writeFile(wb, "حاسبة_البناء.xlsx");
         }
 
         // جلب الأسعار عند تحميل الصفحة
         fetchPrices();
     </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
 </body>
-  </html>
+</html>
