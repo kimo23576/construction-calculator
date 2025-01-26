@@ -49,16 +49,20 @@
             padding: 15px;
             text-align: center;
             position: fixed;
-            top: 70px;
-            z-index: 999;
+            top: 0;
+            z-index: 1001; /* زيادة z-index */
             box-shadow: 0 5px 25px rgba(0,0,0,0.3);
             font-family: 'Almarai', sans-serif;
-            animation: alertPulse 2s infinite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            animation: slideDown 0.5s ease-out;
         }
 
-        @keyframes alertPulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.02); }
+        @keyframes slideDown {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(0); }
         }
 
         .alert-bar a {
@@ -68,9 +72,17 @@
             display: inline-flex;
             align-items: center;
             gap: 10px;
+            padding: 10px 20px;
+            border-radius: 30px;
+            background: rgba(255,255,255,0.15);
+            transition: all 0.3s;
         }
 
-        .alert-bar a i {
+        .alert-bar a:hover {
+            background: rgba(255,255,255,0.25);
+        }
+
+        .alert-bar i {
             font-size: 1.2em;
         }
 
@@ -81,7 +93,7 @@
             padding: 20px;
             text-align: center;
             position: fixed;
-            top: 0;
+            top: 60px; /* تعديل top ليتناسب مع شريط التنبيهات */
             z-index: 1000;
             box-shadow: 0 5px 25px rgba(0,0,0,0.3);
             border-bottom: 3px solid var(--accent-color);
@@ -109,14 +121,15 @@
         /* عنوان الصفحة والتعريف بها */
         .header-section {
             text-align: center;
-            padding: 150px 20px 50px;
+            padding: 150px 20px 100px;
             background: rgba(0,0,0,0.7);
-            margin-top: 140px;
+            margin-top: 120px; /* تعديل margin-top ليتناسب مع الشريط العلوي */
         }
 
         .header-section h1 {
             font-size: 3.5em;
             color: var(--accent-color);
+            text-shadow: 0 0 20px rgba(255,215,0,0.5);
             margin-bottom: 20px;
             animation: fadeIn 2s ease-in-out;
         }
@@ -131,11 +144,11 @@
         }
 
         @keyframes fadeIn {
-            0% { opacity: 0; transform: translateY(20px); }
-            100% { opacity: 1; transform: translateY(0); }
+            0% { opacity: 0; }
+            100% { opacity: 1; }
         }
 
-        /* باقي الأقسام */
+        /* نظام الشرائح المحسّن */
         .slideshow-container {
             width: 100%;
             height: 500px;
@@ -555,7 +568,7 @@
     <div class="alert-bar">
         <a href="https://guyc-ye.com/membership/">
             <i class="fas fa-gift"></i>
-            عرض خاص: خصم 20% على رسوم التسجيل لعضوية الاتحاد العام للمقاولين اليمنيين
+            خصم 20% على رسوم التسجيل لعضوية الاتحاد العام للمقاولين اليمنيين
         </a>
     </div>
 
