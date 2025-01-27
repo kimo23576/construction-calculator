@@ -41,51 +41,6 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* شريط التنبيهات العلوي */
-        .alert-bar {
-            width: 100%;
-            background: linear-gradient(90deg, #e74c3c, #c0392b);
-            color: white;
-            padding: 15px;
-            text-align: center;
-            position: fixed;
-            top: 0;
-            z-index: 1001; /* زيادة z-index */
-            box-shadow: 0 5px 25px rgba(0,0,0,0.3);
-            font-family: 'Almarai', sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-            animation: slideDown 0.5s ease-out;
-        }
-
-        @keyframes slideDown {
-            0% { transform: translateY(-100%); }
-            100% { transform: translateY(0); }
-        }
-
-        .alert-bar a {
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 10px 20px;
-            border-radius: 30px;
-            background: rgba(255,255,255,0.15);
-            transition: all 0.3s;
-        }
-
-        .alert-bar a:hover {
-            background: rgba(255,255,255,0.25);
-        }
-
-        .alert-bar i {
-            font-size: 1.2em;
-        }
-
         /* شريط التحميل العلوي */
         .download-bar {
             width: 100%;
@@ -93,7 +48,7 @@
             padding: 20px;
             text-align: center;
             position: fixed;
-            top: 60px; /* تعديل top ليتناسب مع شريط التنبيهات */
+            top: 0;
             z-index: 1000;
             box-shadow: 0 5px 25px rgba(0,0,0,0.3);
             border-bottom: 3px solid var(--accent-color);
@@ -118,20 +73,87 @@
             50% { box-shadow: 0 0 20px 10px rgba(255,255,255,0.1); }
         }
 
+        /* شريط التنبيهات العلوي */
+        .alert-bar {
+            width: 100%;
+            background: linear-gradient(90deg, #e74c3c, #c0392b);
+            color: white;
+            padding: 15px;
+            text-align: center;
+            position: fixed;
+            top: 80px; /* تأكد من أن هذا يساوي ارتفاع شريط التحميل */
+            z-index: 999;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.3);
+            font-family: 'Almarai', sans-serif;
+            animation: alertPulse 2s infinite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+        }
+
+        @keyframes alertPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+
+        .alert-bar a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .alert-bar a i {
+            font-size: 1.2em;
+        }
+
+        .alert-bar .close-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .alert-bar .close-btn:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
+
+        .alert-bar .register-btn {
+            background: var(--accent-color);
+            color: var(--primary-color);
+            padding: 8px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .alert-bar .register-btn:hover {
+            background: white;
+            color: var(--primary-color);
+            transform: scale(1.05);
+        }
+
         /* عنوان الصفحة والتعريف بها */
         .header-section {
             text-align: center;
-            padding: 150px 20px 100px;
+            padding: 150px 20px 50px;
             background: rgba(0,0,0,0.7);
-            margin-top: 120px; /* تعديل margin-top ليتناسب مع الشريط العلوي */
+            margin-top: 140px;
         }
 
         .header-section h1 {
             font-size: 3.5em;
             color: var(--accent-color);
-            text-shadow: 0 0 20px rgba(255,215,0,0.5);
             margin-bottom: 20px;
             animation: fadeIn 2s ease-in-out;
+            text-shadow: 0 0 20px rgba(255,215,0,0.5);
         }
 
         .header-section p {
@@ -144,11 +166,11 @@
         }
 
         @keyframes fadeIn {
-            0% { opacity: 0; }
-            100% { opacity: 1; }
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
         }
 
-        /* نظام الشرائح المحسّن */
+        /* باقي الأقسام */
         .slideshow-container {
             width: 100%;
             height: 500px;
@@ -378,13 +400,6 @@
             box-shadow: 0 10px 20px rgba(0,0,0,0.2);
         }
 
-        .testimonial-card img {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            margin-bottom: 15px;
-        }
-
         .testimonial-card h3 {
             font-size: 1.5em;
             color: var(--accent-color);
@@ -395,6 +410,12 @@
             font-size: 1.1em;
             color: white;
             line-height: 1.6;
+        }
+
+        .testimonial-card .stars {
+            color: var(--accent-color);
+            font-size: 1.2em;
+            margin-top: 10px;
         }
 
         /* قسم الفيديو التوضيحي */
@@ -557,6 +578,97 @@
 
         .shape1 { width: 200px; height: 200px; top: 20%; left: 10%; }
         .shape2 { width: 150px; height: 150px; top: 60%; right: 15%; animation-delay: -5s; }
+
+        /* شريط أخباري متحرك */
+        .news-bar {
+            width: 100%;
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 15px;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            z-index: 1000;
+            box-shadow: 0 -5px 25px rgba(0,0,0,0.3);
+            font-family: 'Almarai', sans-serif;
+            animation: newsScroll 20s linear infinite;
+            white-space: nowrap;
+        }
+
+        @keyframes newsScroll {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        .news-bar p {
+            display: inline-block;
+            padding-left: 100%;
+            animation: newsScroll 20s linear infinite;
+        }
+
+        /* قسم دليل الأسعار */
+        .price-guide-section {
+            background: rgba(0,0,0,0.7);
+            padding: 60px 20px;
+            margin-top: 100px;
+        }
+
+        .price-guide-section h2 {
+            text-align: center;
+            font-size: 2.5em;
+            color: var(--accent-color);
+            margin-bottom: 40px;
+        }
+
+        .price-guide-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .price-guide-card {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .price-guide-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .price-guide-card h3 {
+            font-size: 1.5em;
+            color: var(--accent-color);
+            margin-bottom: 10px;
+        }
+
+        .price-guide-card p {
+            font-size: 1.1em;
+            color: white;
+            line-height: 1.6;
+        }
+
+        .price-guide-card a {
+            display: inline-block;
+            padding: 10px 20px;
+            background: var(--secondary-color);
+            color: white;
+            border-radius: 25px;
+            text-decoration: none;
+            margin-top: 15px;
+            transition: all 0.3s;
+        }
+
+        .price-guide-card a:hover {
+            background: white;
+            color: var(--primary-color);
+            transform: scale(1.05);
+        }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
@@ -564,20 +676,27 @@
     <div class="floating-shape shape1"></div>
     <div class="floating-shape shape2"></div>
 
-    <!-- شريط التنبيهات العلوي -->
-    <div class="alert-bar">
-        <a href="https://guyc-ye.com/membership/">
-            <i class="fas fa-gift"></i>
-            خصم 20% على رسوم التسجيل لعضوية الاتحاد العام للمقاولين اليمنيين
-        </a>
-    </div>
-
     <!-- شريط التحميل العلوي -->
     <div class="download-bar">
         <a href="https://median.co/share/wwnmbr#apk">
             <i class="fas fa-download fa-bounce"></i>
             حمّل التطبيق الآن - استمتع بتجربة فريدة!
         </a>
+    </div>
+
+    <!-- شريط التنبيهات العلوي -->
+    <div class="alert-bar">
+        <a href="https://guyc-ye.com/membership/">
+            <i class="fas fa-gift"></i>
+            عرض خاص: خصم 20% على رسوم التسجيل لعضوية الاتحاد العام للمقاولين اليمنيين
+        </a>
+        <a href="https://guyc-ye.com/membership/" class="register-btn">سجل الآن</a>
+        <button class="close-btn" onclick="this.parentElement.style.display='none';">&times;</button>
+    </div>
+
+    <!-- شريط أخباري متحرك -->
+    <div class="news-bar">
+        <p>📢 آخر الأخبار: تم تحديث دليل الأسعار لمواد البناء والأعمال. <a href="https://guyc-yemen.com/price-guide/" style="color: var(--accent-color); text-decoration: underline;">اضغط هنا للاطلاع</a></p>
     </div>
 
     <!-- عنوان الصفحة والتعريف بها -->
@@ -657,6 +776,14 @@
             <h3>هل يمكنني الحصول على تقرير مفصل؟</h3>
             <p>نعم، يمكنك تحميل تقرير مفصل بعد الانتهاء من الحسابات.</p>
         </div>
+        <div class="faq-item">
+            <h3>هل يمكنني استخدام الحاسبة على الهاتف المحمول؟</h3>
+            <p>نعم، الحاسبة متوافقة مع جميع الأجهزة بما في ذلك الهواتف المحمولة.</p>
+        </div>
+        <div class="faq-item">
+            <h3>هل يمكنني الحصول على دعم فني؟</h3>
+            <p>نعم، يمكنك التواصل مع فريق الدعم الفني عبر البريد الإلكتروني أو الهاتف.</p>
+        </div>
     </div>
 
     <!-- قسم الشهادات والتقييمات -->
@@ -664,28 +791,68 @@
         <h2>ما يقول عملاؤنا</h2>
         <div class="testimonials-grid">
             <div class="testimonial-card">
-                <img src="https://via.placeholder.com/80" alt="صورة العميل">
                 <h3>محمد أحمد</h3>
                 <p>"الحاسبة ساعدتني في توفير الوقت والمال، أنصح الجميع باستخدامها."</p>
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
             </div>
             <div class="testimonial-card">
-                <img src="https://via.placeholder.com/80" alt="صورة العميل">
                 <h3>فاطمة علي</h3>
                 <p>"واجهة مستخدم رائعة ودقة عالية في النتائج، شكرًا لكم."</p>
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
             </div>
             <div class="testimonial-card">
-                <img src="https://via.placeholder.com/80" alt="صورة العميل">
                 <h3>علي حسن</h3>
                 <p>"أداة ممتازة لتخطيط المشاريع الإنشائية، أنصح بها كل مقاول."</p>
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
             </div>
         </div>
     </div>
 
     <!-- قسم الفيديو التوضيحي -->
     <div class="video-section">
-        <h2>شاهد كيف تعمل الحاسبة</h2>
+        <h2>فيديو تعريفي عن الإتحاد العام للمقاولين اليمنيين</h2>
         <div class="video-container">
             <iframe src="https://www.youtube.com/embed/YrebsJj1S48" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <!-- قسم دليل الأسعار -->
+    <div class="price-guide-section">
+        <h2>دليل الأسعار لمواد البناء والأعمال</h2>
+        <div class="price-guide-grid">
+            <div class="price-guide-card">
+                <h3>أسعار مواد البناء</h3>
+                <p>اطلع على أحدث أسعار مواد البناء في اليمن.</p>
+                <a href="https://guyc-yemen.com/price-guide/">عرض الأسعار</a>
+            </div>
+            <div class="price-guide-card">
+                <h3>أسعار أعمال الطرقات</h3>
+                <p>تعرف على تكاليف مشاريع الطرقات والبنية التحتية.</p>
+                <a href="https://guyc-yemen.com/price-guide/">عرض الأسعار</a>
+            </div>
+            <div class="price-guide-card">
+                <h3>أسعار التشطيبات</h3>
+                <p>تعرف على تكاليف أعمال التشطيبات الداخلية والخارجية.</p>
+                <a href="https://guyc-yemen.com/price-guide/">عرض الأسعار</a>
+            </div>
         </div>
     </div>
 
@@ -738,4 +905,4 @@
         });
     </script>
 </body>
-    </html>
+</html>
