@@ -41,14 +41,48 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* شريط التحميل العلوي */
+        /* شريط الأخبار العلوي */
+        .top-news-bar {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 15px;
+            text-align: center;
+            position: fixed;
+            top: 0;
+            z-index: 1001;
+            font-family: 'Almarai', sans-serif;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.3);
+            border-bottom: 3px solid var(--accent-color);
+            animation: slideIn 1s ease-out;
+        }
+
+        .top-news-bar marquee {
+            font-size: 1.2em;
+            color: var(--accent-color);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .top-news-bar marquee i {
+            color: var(--secondary-color);
+            font-size: 1.5em;
+        }
+
+        @keyframes slideIn {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(0); }
+        }
+
+        /* شريط التحميل */
         .download-bar {
             width: 100%;
             background: linear-gradient(90deg, var(--secondary-color), #16a085);
             padding: 20px;
             text-align: center;
             position: fixed;
-            top: 0;
+            top: 60px; /* تحت شريط الأخبار العلوي */
             z-index: 1000;
             box-shadow: 0 5px 25px rgba(0,0,0,0.3);
             border-bottom: 3px solid var(--accent-color);
@@ -73,7 +107,7 @@
             50% { box-shadow: 0 0 20px 10px rgba(255,255,255,0.1); }
         }
 
-        /* شريط التنبيهات العلوي */
+        /* شريط التنبيهات */
         .alert-bar {
             width: 100%;
             background: linear-gradient(90deg, #e74c3c, #c0392b);
@@ -81,7 +115,7 @@
             padding: 15px;
             text-align: center;
             position: fixed;
-            top: 80px; /* تأكد من أن هذا يساوي ارتفاع شريط التحميل */
+            top: 130px; /* تحت شريط التحميل */
             z-index: 999;
             box-shadow: 0 5px 25px rgba(0,0,0,0.3);
             font-family: 'Almarai', sans-serif;
@@ -140,12 +174,41 @@
             transform: scale(1.05);
         }
 
-        /* عنوان الصفحة والتعريف بها */
+        /* شريط الأخبار السفلي */
+        .bottom-news-bar {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 15px;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            z-index: 1001;
+            font-family: 'Almarai', sans-serif;
+            box-shadow: 0 -5px 25px rgba(0, 0, 0, 0.3);
+            border-top: 3px solid var(--accent-color);
+            animation: slideIn 1s ease-out;
+        }
+
+        .bottom-news-bar marquee {
+            font-size: 1.2em;
+            color: var(--accent-color);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .bottom-news-bar marquee i {
+            color: var(--secondary-color);
+            font-size: 1.5em;
+        }
+
+        /* باقي الأقسام */
         .header-section {
             text-align: center;
-            padding: 150px 20px 50px;
+            padding: 200px 20px 50px;
             background: rgba(0,0,0,0.7);
-            margin-top: 140px;
+            margin-top: 180px;
         }
 
         .header-section h1 {
@@ -170,7 +233,7 @@
             100% { opacity: 1; transform: translateY(0); }
         }
 
-        /* باقي الأقسام */
+       /* باقي الأقسام */
         .slideshow-container {
             width: 100%;
             height: 500px;
@@ -554,7 +617,7 @@
 
         @media (max-width: 768px) {
             .slide h2 { font-size: 2em; }
-            .slide p { font-size: 1.3
+                        .slide p { font-size: 1.3em; }
             .calculators-section { grid-template-columns: 1fr; padding: 20px; }
             .calculator-card { margin-bottom: 20px; }
             .contact-links { gap: 20px; }
@@ -662,8 +725,8 @@
         }
 
         .price-guide-card a:hover {
-            background: var(--accent-color);
-            color: var(--primary-color);
+            background: #16a085;
+            transform: scale(1.05);
         }
 
         /* شريط أخباري سفلي */
@@ -688,10 +751,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <div class="floating-shape shape1"></div>
-    <div class="floating-shape shape2"></div>
+    <!-- شريط الأخبار العلوي -->
+    <div class="top-news-bar">
+        <marquee>
+            <i class="fas fa-bullhorn"></i>
+            🚀 مرحبًا بكم في حاسبة المقاول الذكية! | 🛠️ تعرّف على مميزات الحاسبة | 📞 للاستفسارات: 01-450553 | 📧 info@guyc-ye.com
+        </marquee>
+    </div>
 
-    <!-- شريط التحميل العلوي -->
+    <!-- شريط التحميل -->
     <div class="download-bar">
         <a href="https://median.co/share/wwnmbr#apk">
             <i class="fas fa-download fa-bounce"></i>
@@ -699,7 +767,7 @@
         </a>
     </div>
 
-    <!-- شريط التنبيهات العلوي -->
+    <!-- شريط التنبيهات -->
     <div class="alert-bar">
         <a href="https://guyc-ye.com/membership/">
             <i class="fas fa-gift"></i>
@@ -707,13 +775,6 @@
         </a>
         <a href="https://guyc-ye.com/membership/" class="register-btn">سجل الآن</a>
         <button class="close-btn" onclick="this.parentElement.style.display='none';">&times;</button>
-    </div>
-
-    <!-- شريط أخباري علوي -->
-    <div class="news-bar">
-        <marquee>
-            🚀 تعرّف على حاسبة المقاول الذكية! 🚀 | 🏗️ احسب تكاليف البناء والطرقات بدقة عالية! | 📊 استفد من دليل الأسعار الشامل! | 📞 للتواصل: 01-450553
-        </marquee>
     </div>
 
     <!-- عنوان الصفحة والتعريف بها -->
@@ -794,12 +855,12 @@
             <p>نعم، يمكنك تحميل تقرير مفصل بعد الانتهاء من الحسابات.</p>
         </div>
         <div class="faq-item">
-            <h3>هل يمكنني استخدام الحاسبة على الهاتف؟</h3>
-            <p>نعم، الحاسبة متوافقة مع جميع الأجهزة بما في ذلك الهواتف الذكية.</p>
+            <h3>ما هي دقة الحاسبة؟</h3>
+            <p>دقة الحاسبة تصل إلى 90% بناءً على البيانات المدخلة.</p>
         </div>
         <div class="faq-item">
-            <h3>هل يتم تحديث الأسعار تلقائيًا؟</h3>
-            <p>نعم، يتم تحديث الأسعار يوميًا لضمان دقة النتائج.</p>
+            <h3>هل يمكنني استخدام الحاسبة على الهاتف؟</h3>
+            <p>نعم، الحاسبة متوافقة مع جميع الأجهزة بما في ذلك الهواتف الذكية.</p>
         </div>
     </div>
 
@@ -810,35 +871,17 @@
             <div class="testimonial-card">
                 <h3>محمد أحمد</h3>
                 <p>"الحاسبة ساعدتني في توفير الوقت والمال، أنصح الجميع باستخدامها."</p>
-                <div class="stars">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                </div>
+                <div class="stars">★★★★★</div>
             </div>
             <div class="testimonial-card">
                 <h3>فاطمة علي</h3>
                 <p>"واجهة مستخدم رائعة ودقة عالية في النتائج، شكرًا لكم."</p>
-                <div class="stars">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                </div>
+                <div class="stars">★★★★★</div>
             </div>
             <div class="testimonial-card">
                 <h3>علي حسن</h3>
                 <p>"أداة ممتازة لتخطيط المشاريع الإنشائية، أنصح بها كل مقاول."</p>
-                <div class="stars">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                </div>
+                <div class="stars">★★★★★</div>
             </div>
         </div>
     </div>
@@ -853,26 +896,28 @@
 
     <!-- قسم دليل الأسعار -->
     <div class="price-guide-section">
-        <h2>دليل أسعار مواد البناء والأعمال</h2>
+        <h2>دليل أسعار مواد البناء</h2>
         <div class="price-guide-grid">
             <div class="price-guide-card">
-                <h3>أسعار الأسمنت</h3>
-                <p>تعرف على أحدث أسعار الأسمنت في السوق اليمني.</p>
+                <h3>أسعار مواد البناء الأساسية</h3>
+                <p>تعرف على أحدث أسعار مواد البناء الأساسية في السوق اليمني
+(الحديد - الخشب - الخرسانة - الأسمنت - إلخ).</p>
                 <a href="https://guyc-yemen.com/price-guide/">عرض الأسعار</a>
             </div>
             <div class="price-guide-card">
-                <h3>أسعار الحديد</h3>
-                <p>تعرف على أحدث أسعار الحديد في السوق اليمني.</p>
+                <h3>أسعار مواد التشطيبات</h3>
+                <p>تعرف على أحدث أسعار مواد التشطيبات في السوق اليمني
+(الدهانات - الأبواب - النوافذ - البلاط - إلخ).</p>
                 <a href="https://guyc-yemen.com/price-guide/">عرض الأسعار</a>
             </div>
             <div class="price-guide-card">
-                <h3>أسعار الطوب</h3>
-                <p>تعرف على أحدث أسعار الطوب في السوق اليمني.</p>
+                <h3>أسعار الأيدي العاملة</h3>
+                <p>تعرف على أحدث أسعار الأيدي العاملة في السوق اليمني.</p>
                 <a href="https://guyc-yemen.com/price-guide/">عرض الأسعار</a>
             </div>
             <div class="price-guide-card">
-                <h3>أسعار النيس</h3>
-                <p>تعرف على أحدث أسعار النيس في السوق اليمني.</p>
+                <h3>أسعار المواد التكميلية والديكور</h3>
+                <p>تعرف على أحدث أسعار التكميلية والديكورية في السوق اليمني.</p>
                 <a href="https://guyc-yemen.com/price-guide/">عرض الأسعار</a>
             </div>
         </div>
@@ -889,10 +934,11 @@
         </form>
     </div>
 
-    <!-- شريط أخباري سفلي -->
+    <!-- شريط الأخبار السفلي -->
     <div class="bottom-news-bar">
         <marquee>
-            🏗️ أسعار الأسمنت اليوم: 3100 - 3800 ريال للكيس | 🚧 أسعار الحديد اليوم: 330,000 - 450,000 ريال للطن | 🧱 أسعار الطوب اليوم: 300 ريال للمتر المكعب | 📞 للتواصل: 01-450553
+            <i class="fas fa-info-circle"></i>
+            📊 أهمية الحاسبة: توفير الوقت والمال | 🛠️ مميزات الحاسبة: دقة عالية، تحديثات يومية | 📝 طريقة الاستخدام: سهلة وسريعة | 📖 دليل الأسعار: تعرف على أحدث أسعار مواد البناء | 📞 للاستفسارات: 01-450553
         </marquee>
     </div>
 
