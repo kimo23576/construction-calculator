@@ -1324,3 +1324,144 @@
     // تفعيل الأسئلة الشائعة
     document.querySelectorAll('.faq-item').forEach(item => {
       item.addEventListener('click', () => {
+        const answer = item.querySelector('p');
+        answer.style.display = answer.style.display === 'block' ? 'none' : 'block';
+      });
+    });
+    
+    // تفعيل تبديل النظام (فاتح/داكن)
+    document.getElementById('modeToggle').addEventListener('click', function() {
+      document.body.classList.toggle('light-mode');
+      this.textContent = document.body.classList.contains('light-mode') ? 'الوضع الداكن' : 'الوضع الفاتح';
+    });
+    
+    // إعداد مخطط إحصائي (عمودي) باستخدام Chart.js
+    const ctx = document.getElementById('costChart').getContext('2d');
+    const costChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['أساس', 'تشطيبات', 'ديكور', 'أيدي عاملة'],
+        datasets: [{
+          label: 'تكاليف المشروع (بالريال)',
+          data: [50000, 30000, 15000, 20000],
+          backgroundColor: [
+            'rgba(139,69,19,0.7)',
+            'rgba(26,188,156,0.7)',
+            'rgba(255,215,0,0.7)',
+            'rgba(22,160,133,0.7)'
+          ],
+          borderColor: [
+            'rgba(139,69,19,1)',
+            'rgba(26,188,156,1)',
+            'rgba(255,215,0,1)',
+            'rgba(22,160,133,1)'
+          ],
+          borderWidth: 1
+        }]
+      },
+      options: { responsive: true, scales: { y: { beginAtZero: true } } }
+    });
+    
+    // إعداد مخطط خطي لتتبع اتجاهات التكلفة
+    const ctxLine = document.getElementById('trendChart').getContext('2d');
+    const trendChart = new Chart(ctxLine, {
+      type: 'line',
+      data: {
+        labels: ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو'],
+        datasets: [{
+          label: 'اتجاه التكلفة (بالريال)',
+          data: [45000, 47000, 49000, 51000, 53000, 55000],
+          fill: false,
+          borderColor: 'rgba(26,188,156,1)',
+          tension: 0.1
+        }]
+      },
+      options: { responsive: true }
+    });
+    
+    // إعداد مخطط دائري (Pie Chart)
+    const ctxPie = document.getElementById('pieChart').getContext('2d');
+    const pieChart = new Chart(ctxPie, {
+      type: 'pie',
+      data: {
+        labels: ['مواد البناء', 'تشطيبات', 'أيدي عاملة', 'ديكور'],
+        datasets: [{
+          data: [40, 25, 20, 15],
+          backgroundColor: [
+            'rgba(139,69,19,0.7)',
+            'rgba(26,188,156,0.7)',
+            'rgba(22,160,133,0.7)',
+            'rgba(255,215,0,0.7)'
+          ]
+        }]
+      },
+      options: { responsive: true }
+    });
+    
+    // إعداد مخطط دونات (Doughnut Chart)
+    const ctxDoughnut = document.getElementById('doughnutChart').getContext('2d');
+    const doughnutChart = new Chart(ctxDoughnut, {
+      type: 'doughnut',
+      data: {
+        labels: ['إنشائية', 'تصميم', 'تشطيبات', 'أخرى'],
+        datasets: [{
+          data: [35, 30, 20, 15],
+          backgroundColor: [
+            'rgba(139,69,19,0.7)',
+            'rgba(26,188,156,0.7)',
+            'rgba(22,160,133,0.7)',
+            'rgba(255,215,0,0.7)'
+          ]
+        }]
+      },
+      options: { responsive: true }
+    });
+    
+    // زر العودة للأعلى
+    const backToTop = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => {
+      backToTop.style.display = window.pageYOffset > 300 ? 'block' : 'none';
+    });
+    backToTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+    
+    // تفعيل نافذة الدردشة المحسنة
+    const chatToggle = document.getElementById('chatToggle');
+    const chatWidget = document.getElementById('chatWidget');
+    const chatClose = document.getElementById('chatClose');
+    const chatSend = document.getElementById('chatSend');
+    const chatInput = document.getElementById('chatInput');
+    const chatBody = document.getElementById('chatBody');
+    chatToggle.addEventListener('click', () => {
+      chatWidget.style.display = chatWidget.style.display === 'flex' ? 'none' : 'flex';
+    });
+    chatClose.addEventListener('click', () => { chatWidget.style.display = 'none'; });
+    chatSend.addEventListener('click', sendMessage);
+    chatInput.addEventListener('keypress', function(e) { if(e.key === 'Enter') { sendMessage(); } });
+    function sendMessage() {
+      const msg = chatInput.value.trim();
+      if(msg !== "") {
+        const userMsg = document.createElement('div');
+        userMsg.className = 'chat-message user';
+        userMsg.textContent = msg;
+        chatBody.appendChild(userMsg);
+        chatInput.value = "";
+        setTimeout(() => {
+          const botMsg = document.createElement('div');
+          botMsg.className = 'chat-message bot';
+          botMsg.textContent = "شكرًا لتواصلك، سيتم الرد عليك قريبًا.";
+          chatBody.appendChild(botMsg);
+          chatBody.scrollTop = chatBody.scrollHeight;
+        }, 1000);
+      }
+      chatBody.scrollTop = chatBody.scrollHeight;
+    }
+    
+    // إشعار ملفات تعريف الارتباط
+    const cookieConsent = document.getElementById('cookieConsent');
+    const cookieAccept = document.getElementById('cookieAccept');
+    cookieAccept.addEventListener('click', () => { cookieConsent.style.display = 'none'; });
+  </script>
+</body>
+</html>
