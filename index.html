@@ -267,17 +267,20 @@
     /* تحسين الهيدر */
     .header-section {
       text-align: center;
-      padding: 180px 20px 50px;
+      padding: 50px 20px 50px; /* تقليل المسافة قبل العنوان */
       background: rgba(0,0,0,0.7);
       margin-top: 0;
     }
     
     .header-section h1 {
       font-size: 4em;
-      color: var(--accent-color);
-      margin-bottom: 20px;
-      font-weight: bold;
-      letter-spacing: 3px;
+      font-weight: 900;
+      background: linear-gradient(to right, #FFD700, #FF8C00);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin: 0;
+      letter-spacing: 4px;
+      text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
     }
     
     .header-section p {
@@ -321,6 +324,8 @@
       backdrop-filter: blur(10px);
       border-radius: 20px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      backface-visibility: hidden;
+      transform: translateZ(0);
     }
     
     .slide:nth-child(1) { animation-delay: 0s; }
@@ -383,6 +388,8 @@
       box-shadow: 0 10px 30px rgba(0,0,0,0.1);
       position: relative;
       overflow: hidden;
+      backface-visibility: hidden;
+      transform: translateZ(0);
     }
     
     .calculator-card::before {
@@ -631,7 +638,7 @@
       line-height: 1.6;
     }
     
-    /* كتلة إحصائيات التقييم المحسنة مع أيقونات تفاعلية */
+    /* كتلة إحصائيات التقييم التي تتزايد بشكل مستمر */
     .stats-block {
       display: flex;
       justify-content: center;
@@ -1039,7 +1046,7 @@
     
     #chatShowToggle:hover { background: #16a085; }
     
-    /* ----------------- تحسين قسم لوحة التحكم التحليلية ----------------- */
+    /* تحسين قسم لوحة التحكم التحليلية */
     .analytics-section {
       background: linear-gradient(135deg, rgba(0,0,0,0.85), rgba(0,0,0,0.95));
       padding: 80px 20px;
@@ -1095,6 +1102,8 @@
       border-radius: 15px;
       position: relative;
       transition: transform 0.4s, box-shadow 0.4s;
+      backface-visibility: hidden;
+      transform: translateZ(0);
     }
     
     .analytics-grid .chart-container:hover,
@@ -1126,18 +1135,7 @@
       opacity: 1;
     }
     
-    /* ----------------- إصلاح اهتزاز الصفحة ----------------- */
-    /* تفعيل تسريع الأجهزة للعناصر المتحركة لتقليل الاهتزاز */
-    .slide,
-    .chart-container,
-    .trend-chart-container,
-    .pie-chart-container,
-    .doughnut-chart-container {
-      backface-visibility: hidden;
-      transform: translateZ(0);
-    }
-    
-    /* ----------------- قواعد استجابة إضافية للهواتف المحمولة ----------------- */
+    /* قواعد استجابة إضافية للهواتف المحمولة */
     @media (max-width: 600px) {
       body { font-size: 14px; }
       .main-nav ul li a { font-size: 0.9em; }
@@ -1489,7 +1487,7 @@
     </p>
   </div>
   
-  <!-- زر العودة للأعلى مع لون بني وتفاعله مع التمرير -->
+  <!-- زر العودة للأعلى مع لون بني وتفاعل -->
   <button id="backToTop" title="العودة للأعلى" aria-label="العودة للأعلى">↑</button>
   
   <!-- أيقونة الدردشة العائمة المحسنة مع نص "الدردشة" وزر إغلاق خارجي -->
