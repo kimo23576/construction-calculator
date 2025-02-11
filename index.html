@@ -34,9 +34,12 @@
     
     body {
       font-family: 'Tajawal', sans-serif;
+      /* تم استبدال الحركة الثابتة بخلفية ثابتة */
       background: var(--background-gradient);
-      animation: gradientBG 15s ease infinite;
-      background-size: 400% 400%;
+      /* تم حذف الأنيميشن الخاصة بالخلفية لتجنب الاهتزاز */
+      /* animation: gradientBG 15s ease infinite; */
+      /* يمكن تعديل حجم الخلفية كما تشاء، مثلاً: */
+      background-size: cover;
       min-height: 100vh;
       position: relative;
       color: var(--text-color);
@@ -52,11 +55,13 @@
       background: var(--background-gradient);
     }
     
+    /* (تم الاحتفاظ بتعريف keyframes فقط إذا احتجت إليه لاحقاً)
     @keyframes gradientBG {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
+    */
     
     /* شاشة التحميل */
     .loader {
@@ -170,6 +175,7 @@
       display: flex;
       align-items: center;
       gap: 20px;
+      will-change: transform;
     }
     
     .top-news-bar marquee i { color: var(--secondary-color); font-size: 1.5em; }
@@ -267,7 +273,7 @@
     /* تحسين الهيدر */
     .header-section {
       text-align: center;
-      padding: 50px 20px 50px; /* تقليل المسافة قبل العنوان */
+      padding: 50px 20px 50px; /* تم تقليل المسافة قبل العنوان */
       background: rgba(0,0,0,0.7);
       margin-top: 0;
     }
@@ -326,6 +332,8 @@
       box-shadow: 0 10px 30px rgba(0,0,0,0.3);
       backface-visibility: hidden;
       transform: translateZ(0);
+      animation-timing-function: linear;
+      will-change: transform, opacity;
     }
     
     .slide:nth-child(1) { animation-delay: 0s; }
@@ -1104,6 +1112,7 @@
       transition: transform 0.4s, box-shadow 0.4s;
       backface-visibility: hidden;
       transform: translateZ(0);
+      will-change: transform, opacity;
     }
     
     .analytics-grid .chart-container:hover,
